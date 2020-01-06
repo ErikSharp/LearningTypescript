@@ -19,11 +19,7 @@ let user = {
     lastName: "User"
 };
 
-let student1 = new Student("Jane", "M.", "Doe");
-
-function greeter(person: Person) {
-    return "Hello " + person.firstName + " " + person.lastName;
+export function greeter() {
+    let person = new Student("Jane", "M.", "Doe");
+    console.log("Hello " + person.firstName + " " + person.lastName);
 }
-
-document.body.textContent = greeter(user);
-document.body.textContent = greeter(student1);
