@@ -76,6 +76,7 @@ export function basicTypes() {
     {
         let notSure: any = 4;
         notSure.toFixed(4); //This might error at runtime if the type was not a number
+        assert((notSure as number).toPrecision(2) === "4.0"); //type assertion when we know more than the compiler does
         notSure = "Some different type";
         notSure = false;
         assert(!notSure);
@@ -104,5 +105,17 @@ export function basicTypes() {
                 console.log("This is the song that doesn't end...");
             }
         }
+    }
+
+    //object
+    {
+        function create(o: object | null): void {}
+
+        create({ prop: 0 });
+        create(null);
+        create(undefined);
+
+        //create(42); //error
+        //create("nope"); //error
     }
 }
