@@ -1,3 +1,5 @@
+import { assert } from "../../utils/asserts.js";
+
 export function basicTypes() {
-    console.log("suck it");
+    assert(true);
 }
