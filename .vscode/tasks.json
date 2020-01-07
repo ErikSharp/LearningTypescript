@@ -22,7 +22,8 @@
         },
         {
             "label": "Start All",
-            "dependsOn": ["TypeScript", "Web Server"]
+            "dependsOn": ["TypeScript", "Web Server"],
+            "problemMatcher": [] //this states that we are not interested in the output from these tasks
         }
     ]
 }
