@@ -21,6 +21,3 @@ console.groupEnd();
 console.group("YouTubeCourse");
 execChapter(course, Object.keys({ course })[0]);
 console.groupEnd();
-
-let headerMessage = document.getElementById("message");
-headerMessage.innerText = "All of the assertions have run";

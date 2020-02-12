@@ -17,12 +17,12 @@ export function variableDeclarations() {
     assert(first === 2);
 
     //destructure parameters
-    function f([a, b]: [number, number]) {
+    function paramDestruct([a, b]: [number, number]) {
         assert(a === 1);
         assert(b === 2);
     }
 
-    f([1, 2]);
+    paramDestruct([1, 2]);
 
     let [line1, ...rest] = [
         "123 maple street",
@@ -37,24 +37,29 @@ export function variableDeclarations() {
 
     assert(firstElement === "only me");
 
-    let numbers = [1, 2, 3, 4];
-    let [, b, c] = numbers;
-    assert(b === 2);
-    assert(c === 3);
+    {
+        let numbers = [1, 2, 3, 4];
+        let [, b, c] = numbers;
+        assert(b === 2);
+        assert(c === 3);
+    }
 
     //Tuple destructuring
-    let tuple: [number, string, boolean] = [7, "hello", true];
-    let [a, b, c] = tuple;
-    assert(typeof a === "number");
-    assert(typeof b === "string");
-    let [d, ...ef] = tuple;
-    assert(d === 7);
-    assert(ef.length === 2);
-    assert(ef[1] === true);
-    let [g] = tuple;
-    assert(g === 7);
-    let [, h] = tuple;
-    assert(h === "hello");
+    {
+        let tuple: [number, string, boolean] = [7, "hello", true];
+        let [a, b, c] = tuple;
+        assert(typeof a === "number");
+        assert(typeof b === "string");
+
+        let [d, ...ef] = tuple;
+        assert(d === 7);
+        assert(ef.length === 2);
+        assert(ef[1] === true);
+        let [g] = tuple;
+        assert(g === 7);
+        let [, h] = tuple;
+        assert(h === "hello");
+    }
 
     //Object destructuring
     let o = {
