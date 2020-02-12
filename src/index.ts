@@ -1,5 +1,5 @@
-import { basicTypes } from "./Handbook/basicTypes/basicTypes";
-import { variableDeclarations } from "./Handbook/VariableDeclarations/variableDeclarations";
+import { basicTypes } from "./Handbook/01basicTypes";
+import { variableDeclarations } from "./Handbook/02variableDeclarations";
 import { course } from "./YouTubeCourse/course";
 
 function execChapter(chapter: () => void, name: string) {

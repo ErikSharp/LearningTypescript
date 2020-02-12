@@ -1,4 +1,4 @@
-import { assert } from "../../utils/asserts";
+import { assert } from "../utils/asserts";
 
 export function basicTypes() {
     //numbers

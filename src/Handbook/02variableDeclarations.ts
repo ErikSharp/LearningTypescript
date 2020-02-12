@@ -1,5 +1,6 @@
-import { assert } from "../../utils/asserts";
+import { assert } from "../utils/asserts";
 
+//https://www.typescriptlang.org/docs/handbook/variable-declarations.html
 export function variableDeclarations() {
     //They go over var, let, const which I have already done in LearningJavascript
     //There is nothing new here in TypeScript
@@ -82,7 +83,7 @@ export function variableDeclarations() {
 
     //renaming with specifying the types
     const { a: newName3, c: newName4 }: { a: string; c: string } = o;
-    assert(c === "bar");
+    assert(newName4 === "bar");
 
     //default values
     o.b = undefined;
@@ -106,5 +107,32 @@ export function variableDeclarations() {
 
     f2({ b: 5 });
 
-    //Spread
+    // https://www.typescriptlang.org/docs/handbook/variable-declarations.html#spread
+    {
+        let first = [1, 2];
+        let second = [3, 4];
+        let bothPlus = [0, ...first, ...second, 5];
+        assert(bothPlus.length === 6);
+        assert(bothPlus[1] === 1); //creates a shallow copy
+        assert(first.length === 2); //it doesn't get changed
+
+        //spread objects
+        let classification = {
+            kingdom: "Animalia",
+            phylum: "Chordata",
+            class: "Mammalia",
+            order: "Carnivora",
+            suborder: "Felifornia",
+            family: "Felidae"
+        };
+
+        let georgie = {
+            name: "Georgie",
+            type: "Tabby",
+            family: "Schoonees",
+            ...classification
+        };
+
+        assert(georgie.family === "Felidae"); //this overrides the previous family
+    }
 }
