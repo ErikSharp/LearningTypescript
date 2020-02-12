@@ -1,4 +1,4 @@
-import { assert } from "../Utils/asserts.js";
+import { assert } from "../Utils/asserts";
 
 export function course() {
     type Person = {

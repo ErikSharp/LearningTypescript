@@ -1,7 +1,7 @@
-import { greeter } from "./TS5Minutes/greeter.js";
-import { basicTypes } from "./Handbook/basicTypes/basicTypes.js";
-import { variableDeclarations } from "./Handbook/VariableDeclarations/variableDeclarations.js";
-import { course } from "./YouTubeCourse/course.js";
+import { greeter } from "./TS5Minutes/greeter";
+import { basicTypes } from "./Handbook/basicTypes/basicTypes";
+import { variableDeclarations } from "./Handbook/VariableDeclarations/variableDeclarations";
+import { course } from "./YouTubeCourse/course";
 
 function execChapter(chapter: () => void, name: string) {
     console.group(name);

@@ -4,11 +4,9 @@
     "description": "Put something in here.",
     "main": "index.js",
     "dependencies": {},
-    "devDependencies": {
-        "live-server": "^1.2.1"
-    },
+    "devDependencies": {},
     "scripts": {
-        "start": "live-server --open=/src/index.html --ignore=**/*.ts,**/*.scss"
+        "start": "tsc ./src/index.ts"
     },
     "author": "",
     "license": "ISC"
