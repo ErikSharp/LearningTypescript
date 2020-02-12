@@ -1,4 +1,3 @@
-import { greeter } from "./TS5Minutes/greeter";
 import { basicTypes } from "./Handbook/basicTypes/basicTypes";
 import { variableDeclarations } from "./Handbook/VariableDeclarations/variableDeclarations";
 import { course } from "./YouTubeCourse/course";
@@ -8,10 +7,6 @@ function execChapter(chapter: () => void, name: string) {
     chapter();
     console.groupEnd();
 }
-
-console.group("Getting Started");
-execChapter(greeter, Object.keys({ greeter })[0]);
-console.groupEnd();
 
 console.group("Handbook");
 execChapter(basicTypes, Object.keys({ basicTypes })[0]);
