@@ -84,28 +84,37 @@ export function classes() {
             // #weight: number; //Typescript 3.8 will support the JavaScript private field syntax (prefex #)
             private weight: number;
             protected color = "grey";
+            private readonly cantChange = true;
+            protected readonly onlyConstructor: boolean;
+            readonly publicImmutable = true;
 
             //Automatic creation of properties with a default in the constructor
             //A class with a protected constructor means that the class is abstract
             protected constructor(public quickAndEasy: boolean = true) {
                 this.weight = 5;
+                // this.cantChange = false; //cannot as was already set
+                this.onlyConstructor = true;
+                let canOnlyReadHere = this.cantChange;
             }
         }
 
         class Dog extends Animal {
-            constructor() {
+            constructor(private readonly privateReadonly: boolean) {
                 super();
             }
 
             print() {
                 assert(this.name === "Ada");
                 assert(this.color === "grey");
+                assert(this.onlyConstructor);
+                assert(this.privateReadonly);
             }
         }
 
         // let dog = new Animal(); //cannot instantiate as the constructor in protected
-        let dog = new Dog();
+        let dog = new Dog(true);
         dog.name = "Ada";
+        // dog.publicImmutable = false; //readonly
         assert(dog.name === "Ada");
         //dog.weight = 2; //cannot access
         assert(dog.quickAndEasy);
@@ -125,5 +134,91 @@ export function classes() {
         //This demonstrates that TypeScript checks the structure to determine if types are compatible
         //and in this case they are
         assert(jim.name === "Fido");
+    })();
+
+    //ECMAScript 3 is not supported
+    (function accessors() {
+        const fullNameMaxLength = 10;
+
+        class Employee {
+            private _fullName: string;
+            getCount = 0;
+            private _age = 43;
+
+            //since there is no setter, this is readonly
+            get age(): number {
+                return this._age;
+            }
+
+            get fullName(): string {
+                this.getCount++;
+                return this._fullName;
+            }
+
+            set fullName(newName: string) {
+                if (newName && newName.length > fullNameMaxLength) {
+                    throw new Error("Too big");
+                }
+
+                this._fullName = newName;
+            }
+        }
+
+        let employee = new Employee();
+        let errorThrown = false;
+
+        try {
+            employee.fullName = "Biggus Dickus";
+        } catch (error) {
+            errorThrown = true;
+            assert(error.message === "Too big");
+        }
+
+        assert(errorThrown);
+
+        if (!employee.fullName) {
+            employee.fullName = "Brian";
+        }
+        assert(employee.fullName === "Brian");
+        assert(employee.getCount === 2);
+
+        // employee.age = 42; //compiler says no
+    })();
+
+    (function staticStuff() {
+        class SomeClass {
+            static someValue: string;
+
+            private constructor() {}
+
+            static factory() {
+                return new SomeClass();
+            }
+        }
+
+        SomeClass.someValue = "As you wish";
+        // let foo = new SomeClass(); //nope
+        let foo = SomeClass.factory();
+    })();
+
+    (function abstractClasses() {
+        abstract class SomeOfIt {
+            getAge(): number {
+                return 43;
+            }
+
+            abstract getName(): string; //you have to implement this
+        }
+
+        class TheRestOfIt extends SomeOfIt {
+            getName() {
+                return "Erik";
+            }
+        }
+
+        // let foo = new SomeOfIt(); //nope
+        let foo = new TheRestOfIt();
+        assert(foo.getAge() === 43);
+        assert(foo.getName() === "Erik");
     })();
 }
