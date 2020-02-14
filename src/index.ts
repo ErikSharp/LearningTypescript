@@ -7,12 +7,16 @@ import { course } from "./YouTubeCourse/course";
 
 import { ackerman } from "./FunStuff/ackerman";
 
+import { kataReturnNegative } from "./Kata/returnNegative";
+
 basicTypes();
 variableDeclarations();
 interfaces();
 classes();
 
 course();
+
+kataReturnNegative();
 
 let output = ackerman(3, 5);
 console.log(
