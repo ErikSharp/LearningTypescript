@@ -8,6 +8,7 @@ import { course } from "./YouTubeCourse/course";
 import { ackerman } from "./FunStuff/ackerman";
 
 import { kataReturnNegative } from "./Kata/returnNegative";
+import { kataCountingDuplicates } from "./Kata/countingDuplicates";
 
 basicTypes();
 variableDeclarations();
@@ -17,6 +18,7 @@ classes();
 course();
 
 kataReturnNegative();
+kataCountingDuplicates();
 
 let output = ackerman(3, 5);
 console.log(
