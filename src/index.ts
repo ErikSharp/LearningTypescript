@@ -10,6 +10,7 @@ import { ackerman } from "./FunStuff/ackerman";
 import { kataReturnNegative } from "./Kata/returnNegative";
 import { kataCountingDuplicates } from "./Kata/countingDuplicates";
 import { kataBouncingBalls } from "./Kata/bouncingBalls";
+import { kataIntroToArt } from "./Kata/introToArt";
 
 basicTypes();
 variableDeclarations();
@@ -21,6 +22,7 @@ course();
 kataReturnNegative();
 kataCountingDuplicates();
 kataBouncingBalls();
+kataIntroToArt();
 
 let output = ackerman(3, 5);
 console.log(
