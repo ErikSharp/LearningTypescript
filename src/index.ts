@@ -3,6 +3,7 @@ import { variableDeclarations } from "./Handbook/02variableDeclarations";
 import { interfaces } from "./Handbook/03interfaces";
 import { classes } from "./Handbook/04classes";
 import { functions } from "./Handbook/05functions";
+import { generics } from "./Handbook/06generics";
 
 import { course } from "./YouTubeCourse/course";
 
@@ -19,6 +20,7 @@ variableDeclarations();
 interfaces();
 classes();
 functions();
+generics();
 
 course();
 
