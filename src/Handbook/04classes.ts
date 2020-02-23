@@ -111,7 +111,7 @@ export function classes() {
             }
         }
 
-        // let dog = new Animal(); //cannot instantiate as the constructor in protected
+        // let dog = new Animal(); //cannot instantiate as the constructor is protected
         let dog = new Dog(true);
         dog.name = "Ada";
         // dog.publicImmutable = false; //readonly
