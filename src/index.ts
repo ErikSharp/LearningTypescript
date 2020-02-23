@@ -4,6 +4,7 @@ import { interfaces } from "./Handbook/03interfaces";
 import { classes } from "./Handbook/04classes";
 import { functions } from "./Handbook/05functions";
 import { generics } from "./Handbook/06generics";
+import { enums } from "./Handbook/07enums";
 
 import { course } from "./YouTubeCourse/course";
 
@@ -21,6 +22,7 @@ interfaces();
 classes();
 functions();
 generics();
+enums();
 
 course();
 
