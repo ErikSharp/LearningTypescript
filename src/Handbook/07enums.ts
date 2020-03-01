@@ -82,6 +82,7 @@ export function enums() {
         enum Bits {
             One = 1,
             Two = 1 << 1,
+            Three = 3,
             Four = 1 << 2,
             Seven = One | Two | Four,
             Eight = 1 << 3
@@ -106,5 +107,117 @@ export function enums() {
         }
 
         assert(getLocation("92342") === "USA");
+    })();
+
+    (function memberTypes() {
+        //These are enum members that become their own types!
+        //notice that there is no intialization
+        //none must be initialized
+        enum ShapeKind {
+            Circle,
+            Square
+        }
+
+        interface Circle {
+            kind: ShapeKind.Circle;
+            radius: number;
+        }
+
+        interface Square {
+            kind: ShapeKind.Square;
+            sideLength: number;
+        }
+
+        let c: Circle = {
+            //This cannot be Square here
+            kind: ShapeKind.Circle,
+            radius: 100
+        };
+    })();
+
+    (function unionTypes() {
+        enum E {
+            Foo,
+            Bar
+        }
+
+        function f(x: E) {
+            //Typescript knows that this isn't possible as the types have no overlop
+            // if (x !== E.Foo || x !== E.Bar) {
+            // }
+        }
+    })();
+
+    (function enumsAtRuntime() {
+        enum E {
+            X,
+            Y,
+            Z
+        }
+
+        function f(obj: { X: number }) {
+            return obj.X;
+        }
+
+        assert(typeof E === "object");
+        assert(f(E) === 0);
+    })();
+
+    (function enumsAtCompileTime() {
+        enum LogLevel {
+            Debug,
+            Info,
+            Warn,
+            Error
+        }
+
+        /*
+        This is equivalent to:
+        type LogLevelStrings = 'Debug' | 'Info' | 'Warn' | 'Error'
+        */
+        type LogLevelStrings = keyof typeof LogLevel;
+
+        function printImportant(key: LogLevelStrings, message: string) {
+            const num = LogLevel[key];
+
+            if (num >= LogLevel.Warn) {
+                return {
+                    key: `Log level key is: ${key}`,
+                    num: `Log level value is: ${num}`,
+                    message: `Log level message is: ${message}`
+                };
+            }
+        }
+
+        // printImportant("Erik", "asdf"); //nope, compiler knows that this string wont work
+        let result = printImportant("Warn", "This is my turf");
+        assert(result.key === "Log level key is: Warn");
+        assert(result.num === "Log level value is: 2");
+        assert(result.message === "Log level message is: This is my turf");
+    })();
+
+    (function reverseMapping() {
+        enum Foo {
+            A
+        }
+
+        let a = Foo.A;
+        assert(Foo[a] === "A");
+    })();
+
+    (function constEnums() {
+        //const enums are inlined and so they are faster
+        //they don't have the additional indirection
+        const enum Direction {
+            Up,
+            Down,
+            Left,
+            Right
+        }
+
+        let value = Direction.Left;
+        assert(typeof value !== "object");
+        assert(typeof value === "number");
+        assert(value === 2);
     })();
 }
